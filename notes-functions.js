@@ -98,23 +98,32 @@ console.log(arrowFuncExample(5, 10));
 
 /* Note: let and const have the same block-level scope behavior */
 let letScopeExample = 'Hello';
+
 scopeExampleFunction();
 
 function scopeExampleFunction () {
+
     let letScopeExample = 14; 
     /* ^ Redeclaring a variable inside a smaller scope is called SHADOWING */
+
     console.log(`letScopeExample inside scopeExampleFunction: ${letScopeExample}`); 
     /* This one will output 14, because it will reference the letScopeExample inside the function */
     
     function innerScope() {
-        let letScopeExample2 = 'Inner scope reporting for duty';
+        let letScopeExample2 = 'letScopeExample2y reporting for duty';
         console.log(letScopeExample2);
         console.log(`letScopeExample inside innerScope(): ${letScopeExample}`); 
-        /* This one works: nested scopes can 'see' the outer variables */
+        /* ^ This one works: nested function can 'see' the outer fucntion's variables */
+        /* This is called LEXICAL SCOPE */
+
+        if (true) {
+            letScopeExample2 = 'letScopeExample2 has changed!';
+        }
+        console.log(letScopeExample2);
     }
     innerScope();
-    /* console.log(letScopeExample2); decomment this if you want to test */
-    /* This will throw an error: letScopeExample2 is not defined outside of innerScope() */
+    /* console.log(letScopeExample2); */ /* <- decomment this if you want to test */
+    /* ^ This will throw an error: letScopeExample2 is not defined outside of innerScope() */
 }
 
 console.log(`letScopeExample after scopeExampleFunction: ${letScopeExample}`); 
@@ -131,3 +140,8 @@ function varScopeFunc() {
 }
 
 console.log(varScopeExample);
+
+
+
+
+/* CLOSURES */
