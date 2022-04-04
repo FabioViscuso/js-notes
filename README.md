@@ -12,6 +12,8 @@ You will find included the possibility to run prompt() inside the Node.js REPL.
 ## HOW TO USE THIS
 
 -   Open the whole js-notes folder in your preferred editor
+-   If you plan to use a console prompt(), add this line on top of the file:
+    const prompt = require('prompt-sync')();
 -   To run a file, open a terminal pointing to the js-notes folder and type: node filename.js
 
 Example: node notes-functions.js will run all the code written in that file,
