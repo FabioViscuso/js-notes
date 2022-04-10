@@ -1,12 +1,16 @@
 const prompt = require("prompt-sync")();
 
 /* FUNCTIONS */
-/* To their core, functions are just reusable chunks of code */
+/* Functions are just reusable chunks of code */
 /* A good function usually carries out a single task, no matter the required lines of code */
-/* We then call the function at some point in our code, feeding it data if needed */
+/* We call functions at some point in our code, feeding it data if needed */
 
 /* FUNCTION DECLARATION */
 /* The function declaration is the standard way for creating functions */
+
+
+/*  */ console.log('----- Function Declaration -----'); /*  */
+
 
 console.log(funcDeclarExample("Fabio", 29)); 
 /* ^ It can be called before the actual declaration */
@@ -29,6 +33,8 @@ console.log(funcDeclarExample("Giacomo"));
 /* FUNCTION EXPRESSION */
 /* A function is essentially a value, so it can also be assigned to a variable or a constant */
 
+/*  */ console.log('----- Function Expression -----') /*  */
+
 const funcExprssExample = function (num1 = 0, num2 = 0) {
     /* Initializing arguments adds complexity, but might be safer ^ */
     return `The sum of ${num1} and ${num2} is ${num1 + num2}`;
@@ -43,6 +49,8 @@ console.log(funcExprssExample(10, 4));
 /* CALLBACKS */
 /* A function called inside another function, passed as an argument */
 /* This way, we pass not the computed value of a function, but the whole code and functionality */
+
+/*  */ console.log('----- Callbacks -----'); /*  */
 
 /* Our callback */
 function callbackExample(name) {
@@ -72,6 +80,8 @@ callbackPrompt(callbackExample2);
 /* A more concise way to declare functions. ES6+ */
 /* Uses a syntax like [let/const] [name] = (parameters) => {instructions} */
 
+/*  */ console.log('----- Arrow Functions -----'); /*  */
+
 const arrowFuncExample = (param1, param2) => {
     if (param1 % param2 === 0) {
         return `${param1} can be divided by ${param2}`;
@@ -96,8 +106,16 @@ console.log(arrowFuncExample(5, 10));
 /* We can define the 'scope' of a variable as its lifespan */
 /* In particular, a variabile will only 'live' inside the block of code it's declared within */
 
+/* LEXICAL SCOPE */
+/* The lexical scope defines the scope of the variabile based
+   on its position in the code */
+/* For example, a variable declared outside any function is a GLOBAL VARIABLE,
+   while a variable declared in a function is a LOCAL VARIABLE */
+
+/*  */ console.log('----- let/const Scope -----'); /*  */
+
 /* Note: let and const have the same block-level scope behavior */
-let letScopeExample = 'Hello';
+let letScopeExample = 'Hello'; /* This can be considered a global variable */
 
 scopeExampleFunction();
 
@@ -113,8 +131,7 @@ function scopeExampleFunction () {
         let letScopeExample2 = 'letScopeExample2y reporting for duty';
         console.log(letScopeExample2);
         console.log(`letScopeExample inside innerScope(): ${letScopeExample}`); 
-        /* ^ This one works: nested function can 'see' the outer fucntion's variables */
-        /* This is called LEXICAL SCOPE */
+        /* ^ This one works: nested function can 'see' the outer function's variables */
 
         if (true) {
             letScopeExample2 = 'letScopeExample2 has changed!';
@@ -129,19 +146,69 @@ function scopeExampleFunction () {
 console.log(`letScopeExample after scopeExampleFunction: ${letScopeExample}`); 
 /* This will output 'Hello', referencing the first letScopeExample */
 
+/*  */ console.log('----- var Scope -----'); /*  */
 
 /* The infamous 'var'. Try to never use it */
 var varScopeExample = 31;
 
 varScopeFunc();
 function varScopeFunc() {
-    var varScopeExample = 'hi';
+    var varScopeExample = `Final varScopeExample value is ${varScopeExample}`;
     console.log(varScopeExample);
 }
 
-console.log(varScopeExample);
+console.log(`Final varScopeExample value is ${varScopeExample}`); 
+/* Since we probably are in the 'strict mode', this one will output 31. */
+/* Else it would have been shadowed by the varScopeExample within 
+   the varScopeFunc(), printing 'hi' instead */
 
 
 
 
 /* CLOSURES */
+/* By definition, a closure is an inner function having access to the outer scope,
+   even if the parent function has been executed */
+
+
+/*  */ console.log('----- Closures Example 1 -----'); /*  */
+
+/* Here we want to make 'counter' accessible only within addOne */
+const addOne = function () {
+
+    let counter = 0;
+
+    return function () {
+        
+        counter += 1;
+        console.log(counter);
+        return counter;
+
+    }
+}();
+
+addOne();
+addOne();
+addOne();
+addOne();
+
+/*  */ console.log('----- Closures Example 2 -----'); /*  */
+
+function outerScope(greeting) {
+
+    return (name) => `${greeting}, ${name}!`; /* <- That's out closure */
+    /* The first thing outerScope does, is to return this whole function,
+       which is then stored into sampleVariable */
+}
+
+const sayHello = outerScope('Hello');
+/* This one will contain a whole function. But it also retains the 'Hello' parameter */
+
+console.log(sayHello('Mario'));
+console.log(sayHello('Luigi'));
+/* We can see it retain */
+
+const sayGoodbye = outerScope('Goodbye');
+/* For demoing purposes, we call outer */
+
+console.log(sayGoodbye('Bowser'));
+console.log(sayGoodbye('Mario'));
