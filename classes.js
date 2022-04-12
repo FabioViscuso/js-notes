@@ -1,4 +1,8 @@
 /* CLASSES */
+/* Classes can be considered as a 'template' for objects,
+   which are instances of a class */
+/* The main difference between classes and objects is that
+   classes can't be modified, therefore are safer to use */
 class Plane {
     constructor(engine, model, serial) {
        this.engine = engine;
@@ -13,20 +17,20 @@ class Plane {
     fly() {
         return `${this.model} is flying!`;
     }
-   }
+}
    
-   const Airbus = new Plane('Rolls-Royce', 'A320', 2431);
-   const Boeing = new Plane('Pratt-Whitney', 'B747', 4193)
+const Airbus = new Plane('Rolls-Royce', 'A320', 2431);
+const Boeing = new Plane('Pratt-Whitney', 'B747', 4193)
    
-   console.log(Airbus.fly());
+console.log(Airbus.fly());
    
-   const playGame = () => {
-       if(Airbus.fly() === Boeing.fly()) {
-           return 'Collision imminent!';
-       } else {
-           return 'All safe';
-       }
-   }
+const playGame = () => {
+    if(Airbus.fly() === Boeing.fly()) {
+        return 'Collision imminent!';
+    } else {
+        return 'All safe';
+    }
+}
    
    console.log(playGame());
    

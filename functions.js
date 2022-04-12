@@ -54,23 +54,23 @@ console.log(funcExprssExample(10, 4));
 
 /* Our callback */
 function callbackExample(name) {
-    console.log(`Hello ${name}`);
+    return (`Hello ${name}`);
 }
 
 /* A second callback, just for demo */
 function callbackExample2(name) {
-    console.log(`Fuck you, ${name}!`);
+    return (`Fuck you, ${name}!`);
 }
 
 function callbackPrompt(func) {
     let pippo = 'John';
-    func(pippo); /* Here callbackExample is referenced as 'callback' parameter */
+    return func(pippo); /* Here callbackExample is referenced as 'callback' parameter */
 }
 
-callbackPrompt(callbackExample); 
+console.log(callbackPrompt(callbackExample)); 
 /* Here we call the prompt function, passing callbackExample as a parameter */
 
-callbackPrompt(callbackExample2);
+console.log(callbackPrompt(callbackExample2));
 /* This time we pass the insult function */
 
 
@@ -195,7 +195,7 @@ addOne();
 
 function outerScope(greeting) {
 
-    return (name) => `${greeting}, ${name}!`; /* <- That's out closure */
+    return (name) => `${greeting}, ${name}!`; /* <- That's a closure */
     /* The first thing outerScope does, is to return this whole function,
        which is then stored into sampleVariable */
 }

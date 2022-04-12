@@ -20,16 +20,17 @@ console.log(sampleArray[sampleArray.length - 1]); /* will output the last elemen
 
 
 /* CYCLE ARRAYS */
-/* You can use any loop tipe, such as while and for */
+/* You can use any loop type, such as while and for */
+/*  */ console.log('----- for loop Example -----'); /*  */
 for (let i = 0; i < sampleArray.length; i++) {
     console.log(sampleArray[i]);
 }
 
 /* But you can also use forEach, which is commonly used with arrays */
-sampleArray.forEach(element => {
-    console.log(element);
-});
+/*  */ console.log('----- forEach Example -----'); /*  */
+sampleArray.forEach(element => sampleArray[element] = 'POST');
 
+/*  */ console.log('----- forEach Example with conditionals -----'); /*  */
 sampleArray.forEach(element => {
     if (isNaN(element)) { /* Of course you can use conditionals */
         console.log(element);
@@ -57,5 +58,39 @@ console.log(`The pop() value is ${poppedValue} and the shift() value is ${shifte
 
 
 /* ADD ELEMENTS */
-array.push('example'); /* Adds 'example' to the end */
-array.unshift('example'); /* Adds 'example' to the start */
+array.push('pushExample'); /* Adds 'example' to the end */
+array.unshift('unshiftExample'); /* Adds 'example' to the start */
+
+/* IMPORTANT METHODS */
+/* .splice() */
+/* This method can be used for
+    - eliminating 'n' elements from a given index
+    - substitute parts of an array from a given index
+    - add new elements from a given index, without any removal 
+    ... all of this by modifying the original array */
+const months = ['Jan', 'Feb', 'March', 'JIMMY', 'ADA', 'April'];
+months.splice(3, 2); /* We remove JIMMY and ADA by removing 2 items from index 3 */
+months.splice(months.length, 0, 'May', 'June', 'July'); /* We add more months from the end of the array */
+console.log(months);
+
+/* .slice() */
+/* This method can be used to copy parts of an array without modifying it */
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const lessNumbers = numbers.slice(3,7);
+
+/* .filter() */
+/* This metod returns an array based on a condition */
+const people = [
+    {name: 'John', age: 17},
+    {name: 'Jane', age: 27},
+    {name: 'Jimmy', age: 12},
+    {name: 'Linda', age: 9},
+    {name: 'Louis', age: 35}
+]
+
+const adults = people.filter(element => element.age > 17);
+console.log(adults);
+
+/* OTHER METHODS */
+/* MDN is a good resource, shift+rightClick to open the link 
+   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array */
