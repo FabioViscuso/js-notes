@@ -175,3 +175,39 @@ function addNumbers (num1, num2, ...nums) {
 }
 
 console.log(addNumbers(1, 4, 0, 3, 5, -10, 0))
+
+
+
+/* SET-TIMEOUT & SET-INTERVAL */
+/* Set-timeout is an integrated function that makes it possible to
+   run some code after some time, expresses in milliseconds */
+/* It's important to note that setTimeout() is ASYNCHRONOUS and NON-BLOCKING */
+/* PLEASE NOTE: setInterval and setTimeout timings can't be considered exact */
+
+/*  */ console.log('----- setTimeout -----'); /*  */
+
+function sayHello() {
+    console.log('Hello!')
+}
+
+setTimeout(sayHello, 1000); // we need to pass the function, not the function calling
+console.log('Hello again!');
+/* Even if the second log comes after the first one with setTimeout,
+   it will be shown first because it doesn't wait for setTimeout() */
+
+
+/*  */ console.log('----- setTimeout w/inline function and params -----'); /*  */
+setTimeout((greeting, name) => console.log(`${greeting}, ${name}!`), 3000, 'Hi', 'John')
+
+
+/*  */ console.log('----- setInterval w/clearTimeout -----'); /*  */
+
+function knocking (person) {
+    console.log(`Toc toc, are you there ${person}?`);
+}
+
+let intervalID = setInterval(knocking, 2000, "Jimmy");
+setTimeout (() => clearTimeout(intervalID), 8000);
+/* clearTimeout takes a returned element from setInterval called interva ID
+   and uses it to kill the interval after some time specified in milliseconds in another
+   setTimeout */
